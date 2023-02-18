@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Todo2.Dtos;
 using Todo2.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,9 +18,24 @@ namespace Todo2.Controllers
         }
         // GET: api/<TodoItemsController>
         [HttpGet]
-        public ActionResult< IEnumerable<TodoItem>> Get()
+        public IEnumerable<TodoItemSelectDto> Get()
         {
-            return _todoContext.TodoItems.ToList();
+            var result = from a in _todoContext.TodoItems
+                         where a.Name == "Item2"
+                         select a;
+            var result3 = _todoContext.TodoItems.ToList();
+            var result2 = _todoContext.TodoItems.Where(a => a.Name == "walk dog");
+
+
+            //try dto
+            var result4 = _todoContext.TodoItems.Select(a => new TodoItemSelectDto
+            {
+                Name = a.Name,
+                IsComplete= a.IsComplete,
+                NameId = a.Name
+            });
+                         
+            return result4;
         }
 
         // GET api/<TodoItemsController>/5
