@@ -21,68 +21,76 @@ public partial class TodoContext : DbContext
 
     public virtual DbSet<JobTitle> JobTitles { get; set; }
 
-    public virtual DbSet<Owner> Owners { get; set; }
-
-    public virtual DbSet<Todo> Todos { get; set; }
+    public virtual DbSet<TodoList> TodoLists { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
+
         modelBuilder.Entity<Division>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Division");
+            entity.HasKey(e => e.DivisionId).HasName("PK__Division__20EFC6A8F99D2514");
 
-            entity.Property(e => e.Test)
-                .HasMaxLength(10)
-                .IsFixedLength()
-                .HasColumnName("test");
+            entity.ToTable("Division");
+
+            entity.Property(e => e.DivisionId).HasDefaultValueSql("(newid())");
+            entity.Property(e => e.Name).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Employee");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04F114A9BEF50");
 
-            entity.Property(e => e.T)
-                .HasMaxLength(10)
-                .IsFixedLength()
-                .HasColumnName("t");
+            entity.ToTable("Employee");
+
+            entity.Property(e => e.EmployeeId).HasDefaultValueSql("(newid())");
+            entity.Property(e => e.Name).HasMaxLength(50);
+
+            entity.HasOne(d => d.Division).WithMany(p => p.Employees)
+                .HasForeignKey(d => d.DivisionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Employee_ToTable_1");
+
+            entity.HasOne(d => d.JobTitle).WithMany(p => p.Employees)
+                .HasForeignKey(d => d.JobTitleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Employee_ToTable");
         });
 
         modelBuilder.Entity<JobTitle>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("JobTitle");
+            entity.HasKey(e => e.JobTitleId).HasName("PK__JobTitle__35382FE932476E76");
 
-            entity.Property(e => e.JobTitle1)
-                .HasMaxLength(10)
-                .IsFixedLength();
+            entity.ToTable("JobTitle");
+
+            entity.Property(e => e.JobTitleId).HasDefaultValueSql("(newid())");
+            entity.Property(e => e.Name).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<Owner>(entity =>
+        modelBuilder.Entity<TodoList>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Owner");
+            entity.HasKey(e => e.TodoId).HasName("PK__Table__95862552FC49C675");
 
-            entity.Property(e => e.O)
-                .HasMaxLength(10)
-                .IsFixedLength();
-        });
+            entity.ToTable("TodoList");
 
-        modelBuilder.Entity<Todo>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("Todo");
+            entity.Property(e => e.TodoId).HasDefaultValueSql("(newid())");
+            entity.Property(e => e.InsertTime)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.UpdateTime)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
 
-            entity.Property(e => e.Tod)
-                .HasMaxLength(10)
-                .IsFixedLength();
+            entity.HasOne(d => d.InsertEmployee).WithMany(p => p.TodoListInsertEmployees)
+                .HasForeignKey(d => d.InsertEmployeeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Todo_ToTable");
+
+            entity.HasOne(d => d.UpdateEmployee).WithMany(p => p.TodoListUpdateEmployees)
+                .HasForeignKey(d => d.UpdateEmployeeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Todo_ToTable_1");
         });
 
         OnModelCreatingPartial(modelBuilder);

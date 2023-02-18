@@ -5,5 +5,9 @@ namespace tododotnet6prac.Models;
 
 public partial class JobTitle
 {
-    public string? JobTitle1 { get; set; }
+    public Guid JobTitleId { get; set; }
+
+    public string Name { get; set; } = null!;
+
+    public virtual ICollection<Employee> Employees { get; } = new List<Employee>();
 }

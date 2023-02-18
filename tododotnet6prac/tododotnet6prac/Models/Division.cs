@@ -5,5 +5,9 @@ namespace tododotnet6prac.Models;
 
 public partial class Division
 {
-    public string? Test { get; set; }
+    public Guid DivisionId { get; set; }
+
+    public string Name { get; set; } = null!;
+
+    public virtual ICollection<Employee> Employees { get; } = new List<Employee>();
 }
