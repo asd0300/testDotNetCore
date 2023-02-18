@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Todo2.Dtos;
 using Todo2.Models;
@@ -12,9 +13,11 @@ namespace Todo2.Controllers
     public class TodoItemsController : ControllerBase
     {
         private readonly TodoContext _todoContext;
-        public TodoItemsController(TodoContext todoContext)
+        private readonly IMapper _iMapper; // automapper 使用 
+        public TodoItemsController(TodoContext todoContext, IMapper iMapper) //同樣也要向_todoContext 由建構子注入
         {
             _todoContext = todoContext;
+            _iMapper = iMapper;
         }
         // GET: api/<TodoItemsController>
         [HttpGet]
@@ -34,19 +37,37 @@ namespace Todo2.Controllers
                 IsComplete= a.IsComplete,
                 NameId = a.Name
             });
+
+            // try automapper
+            var result5 = _todoContext.TodoItems;
                          
-            return result4;
+            return _iMapper.Map<IEnumerable<TodoItemSelectDto>>(result5);
         }
 
         // GET api/<TodoItemsController>/5
         [HttpGet("{id}")]
-        public ActionResult<TodoItem> Get(Guid id)
+        //public ActionResult<TodoItem> Get(Guid id)
+        //{
+        //    var result = _todoContext.TodoItems.Find(id);
+        //    if(result == null)
+        //    {
+        //        return NotFound("找不到資源"); //respon 400
+        //    }
+        //    return result;
+        //}
+
+        public TodoItemSelectDto Get(Guid id)
         {
-            var result = _todoContext.TodoItems.Find(id);
-            if(result == null)
-            {
-                return NotFound("找不到資源"); //respon 400
-            }
+            var  result = (from a in _todoContext.TodoItems
+                           join b in _todoContext.
+                         where a.Id == id
+                         select new TodoItemSelectDto
+                         {
+                             Id = a.Id,
+                             Name = a.Name,
+                             IsComplete = a.IsComplete,
+                             NameId = a.Name
+                         }).SingleOrDefault(); //Single() 與SingleOrDefault() 差異 , 前者只回傳一筆資料如超過兩筆或null則抱錯，後者是有可能會有空資料集合
             return result;
         }
 

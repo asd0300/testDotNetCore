@@ -17,6 +17,8 @@ namespace tododotnet6prac
             {
                 options.UseSqlServer(connectionString);
             });
+            //automapper service inject 
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

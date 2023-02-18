@@ -80,3 +80,5 @@ C:\VS\gittest\Todo2\Todo2\obj\Debug\net6.0\refint\Todo2.dll
 C:\VS\gittest\Todo2\Todo2\obj\Debug\net6.0\Todo2.pdb
 C:\VS\gittest\Todo2\Todo2\obj\Debug\net6.0\Todo2.genruntimeconfig.cache
 C:\VS\gittest\Todo2\Todo2\obj\Debug\net6.0\ref\Todo2.dll
+C:\VS\gittest\Todo2\Todo2\bin\Debug\net6.0\AutoMapper.dll
+C:\VS\gittest\Todo2\Todo2\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

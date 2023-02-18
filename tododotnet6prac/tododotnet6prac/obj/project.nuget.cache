@@ -1,14 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "80MiWfSAy9BnbxWFxWBUo2TDU0yIGT1cGITkKF+J+Qb8MZ7nbf/xUvkmh1FRAz7idW7opHBaz+n99DpU8yWv1g==",
+  "dgSpecHash": "HxkezY9OG9QnnfZh0gAYYDAJmxrhsnCaKXMgiTsMBj8I6aZ565qbIqCqxZ6JajMk8hasj29R3Tqh3J3qIogL6Q==",
   "success": true,
   "projectFilePath": "C:\\VS\\gittest\\tododotnet6prac\\tododotnet6prac\\tododotnet6prac.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ben.fan.SOLVENTOSOFT\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\ben.fan.SOLVENTOSOFT\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\ben.fan.SOLVENTOSOFT\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\ben.fan.SOLVENTOSOFT\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\ben.fan.SOLVENTOSOFT\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\ben.fan.SOLVENTOSOFT\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
-    "C:\\Users\\ben.fan.SOLVENTOSOFT\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\ben.fan.SOLVENTOSOFT\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\ben.fan.SOLVENTOSOFT\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.1\\microsoft.data.sqlclient.5.0.1.nupkg.sha512",
     "C:\\Users\\ben.fan.SOLVENTOSOFT\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\5.0.1\\microsoft.data.sqlclient.sni.runtime.5.0.1.nupkg.sha512",
     "C:\\Users\\ben.fan.SOLVENTOSOFT\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.3\\microsoft.entityframeworkcore.7.0.3.nupkg.sha512",

@@ -15,6 +15,8 @@ namespace Todo2
 
             builder.Services.AddDbContext<TodoContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("TodoDatabase")));
+            //automapper service inject 
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 
