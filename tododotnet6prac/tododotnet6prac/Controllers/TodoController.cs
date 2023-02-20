@@ -71,17 +71,7 @@ namespace tododotnet6prac.Controllers
 
 
             //try dto
-            var result4 = _todoContext.TodoLists.Select(a => new TodoListSelectDto
-            {
-                TodoId = a.TodoId,
-                Name = a.Name,
-                InsertTime = a.InsertTime,
-                UpdateTime = a.UpdateTime,
-                Enable = a.Enable,
-                Orders = a.Orders,
-                InsertEmployee = a.Name,
-                UpdateEmployee = a.Name,
-            });
+            var result4 = _todoContext.TodoLists.Select(a => ItemToDTO(a));
             // try automapper
             var result5 = _todoContext.TodoLists;
 
@@ -132,6 +122,20 @@ namespace tododotnet6prac.Controllers
             return result;
         }
 
+        [HttpGet("From/{id}")]
+        public dynamic GetFrom( [FromQuery] string id2, [FromBody] string id3)
+        {
+            List<dynamic> result = new List<dynamic>();
+            //result.Add(id);
+            result.Add(id2);
+            result.Add(id3);
+
+
+
+
+            return result;
+        }
+
         // POST api/<TodoController>
         [HttpPost]
         public void Post([FromBody] string value)
@@ -148,6 +152,21 @@ namespace tododotnet6prac.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        private static TodoListSelectDto ItemToDTO(TodoList a)
+        {
+            return new TodoListSelectDto
+            {
+                TodoId = a.TodoId,
+                Name = a.Name,
+                InsertTime = a.InsertTime,
+                UpdateTime = a.UpdateTime,
+                Enable = a.Enable,
+                Orders = a.Orders,
+                InsertEmployee = a.Name,
+                UpdateEmployee = a.Name,
+            };
         }
     }
 }
